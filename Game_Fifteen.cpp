@@ -1,6 +1,7 @@
 ﻿#include <iostream>
-using std::cout;
-using std::endl;
+#include<stdio.h>
+#include<ctype.h>
+using namespace std;
 
 //Функция замены ноля на пробел. Игра "Пятнашки".
 void ZeroToSpace(int arr[][4], int row, int col)
@@ -37,7 +38,7 @@ void PrintPlayingField(int arr[][4], int size = 4)
 }
 
 // Функция перемешивает матрицу. Игра "Пятнашки".
-void ShakeArr(int arr[][4], int size = 4)
+void AutoShakeArr(int arr[][4], int size = 4)
 {
 	int min = 0;
 	int max = 3;
@@ -59,7 +60,75 @@ void ShakeArr(int arr[][4], int size = 4)
 		n--;
 	}
 }
+// Функция перемешивает матрицу в ручную. Игра "Пятнашки".
+void HandleShakeArr(int arr[][4], int size, int userMove)
+{
+	int row{ 0 }, col{ 0 };
+	enum Arrows
+	{
+		up = 72, down = 80, left = 75, right = 77
+	};
+	switch (userMove)
+	{
+	case up:
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				row = i + 1;
+				col = j;
+				int temp = arr[i][j];
+				arr[i][j] = arr[row][col];
+				arr[row][col] = temp;
+			}
+		}
+		break;
 
+	case down:
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				row = i + 1;
+				col = j;
+				int temp = arr[i][j];
+				arr[i][j] = arr[row][col];
+				arr[row][col] = temp;
+			}
+		}
+		break;
+
+	case left:
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				row = i;
+				col = j + 1;
+				int temp = arr[i][j];
+				arr[i][j] = arr[row][col];
+				arr[row][col] = temp;
+			}
+		}
+		break;
+
+	case right:
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				row = i;
+				col = j + 1;
+				int temp = arr[i][j];
+				arr[i][j] = arr[row][col];
+				arr[row][col] = temp;
+			}
+		}
+		break;
+	}
+
+
+}
 // Функция хода. Игра "Пятнашки". Не совсем верный вариант, как оказалось, функция передвигает пустой квадратик...
 //void Move(int arr[][4], int size, int userMove)
 //{
